@@ -1,0 +1,68 @@
+<%- include ('../partials/adminHeader.ejs') %>
+
+    <!-- Recent Sales Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control bg-dark border-0" type="search" name="search" placeholder="Search">
+                    <input type="submit" value="search">
+                </form>
+                <a href="">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr  class="text-dark">
+
+                            <th scope="col">SI.NO</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">UserName</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if( users.length> 0){ %>
+                            <% for(let i=1;i <=users.length; i++){ %>
+                                <tr class="text-dark">
+                                    <td>
+                                        <%= i %>
+                                    </td>
+                                    <td>
+                                        <%= users[i-1].name %>
+                                    </td>
+                                    <td>
+                                        <%= users[i-1].username %>
+                                    </td>
+                                    <td>
+                                        <%= users[i-1].mobile %>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-info" href="">
+                                            <% if(users[i-1].isVerified) { %> Unblock
+                                                <% }else{ %> Block
+                                                    <% } %>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary"
+                                            href="/admin/block-user?id=<%= users[i-1]._id %>">
+                                            <% if(users[i-1].isVerified) { %> Block
+                                                <% }else{ %> Unblock
+                                                    <% } %>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <% } } else{ %>
+                                    <tr>
+                                        <td colspan="5">Users Not Found</td>
+                                    </tr>
+                                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Sales End -->

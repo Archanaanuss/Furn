@@ -1,0 +1,402 @@
+<% if(isLoggedin) { %>
+    <%- include ('../partials/userHeader.ejs',{ccount:ccount,wcount:wcount,category:category}) %>
+
+        <%}else { %>
+            <%- include ('../partials/landingHeader.ejs',{category:category}) %>
+                <%}%>
+
+
+                    <main class="main">
+                        <div class="intro-slider-container">
+                            <% if(banner.length> 0) {
+                                for(let i=1;i<=banner.length;i++){%>
+
+
+                                    <div class="owl-carousel owl-simple owl-light owl-nav-inside" data-toggle="owl"
+                                        data-owl-options='{"nav": false}'>
+                                        <div class="intro-slide"
+                                            style="background-image: url(/productImage/<%=banner[i-1].bimage%>);">
+                                            <div class="container intro-content">
+                                                <h3 class="intro-subtitle"> Classic Furnitures</h3>
+                                                <!-- End .h3 intro-subtitle -->
+                                                <h1 class="intro-title">
+                                                    <%=banner[i-1].btitle%>
+                                                </h1>
+                                                <!-- End .intro-title -->
+
+                                                <a href="/shop" class="btn btn-primary">
+                                                    <span>Shop Now</span>
+                                                    <i class="icon-long-arrow-right"></i>
+                                                </a>
+                                            </div><!-- End .container intro-content -->
+                                        </div><!-- End .intro-slide -->
+                                        
+                              
+                                    </div>
+                                    <%}}%>
+                                        <span class="slider-loader text-white"></span><!-- End .slider-loader -->
+                                    </div><!-- End .intro-slider-container -->
+
+                                    <div class="brands-border owl-carousel owl-simple" data-toggle="owl"
+                                        data-owl-options='{
+                    "nav": false, 
+                    "dots": false,
+                    "margin": 0,
+                    "loop": false,
+                    "responsive": {
+                        "0": {
+                            "items":2
+                        },
+                        "420": {
+                            "items":3
+                        },
+                        "600": {
+                            "items":4
+                        },
+                        "900": {
+                            "items":5
+                        },
+                        "1024": {
+                            "items":6
+                        },
+                        "1360": {
+                            "items":7
+                        }
+                    }
+                }'>
+                                        <a href="#" class="brand">
+                                          <!-- <img src="assets/images/brands/1.png" alt="Brand Name">-->
+                                          <h4>URBAN  LADDER</h4>
+
+                                        </a>
+
+                                        <a href="#" class="brand">
+                                             <!--<img src="assets/images/brands/2.png" alt="Brand Name">-->
+                                             <h4>DURIAN </h4>
+                                        </a>
+
+                                        <a href="#" class="brand">
+                                           <!-- <img src="assets/images/brands/3.png" alt="Brand Name">-->
+                                           <h4>IKEA</h4>
+                                        </a>
+
+                                        <a href="#" class="brand">
+                                           <!-- <img src="assets/images/brands/4.png" alt="Brand Name">-->
+                                           <h4>DAMRO</h4>
+                                        </a>
+
+                                        <a href="#" class="brand">
+                                            <!-- <img src="assets/images/brands/5.png" alt="Brand Name">-->
+                                            <h4>EVOK</h4>
+                                        </a>
+
+                                        <a href="#" class="brand">
+                                            <!-- <img src="assets/images/brands/6.png" alt="Brand Name">-->
+                                            <h4>ZUARI</h4>
+                                        </a>
+
+                                        <a href="#" class="brand">
+                                            <!-- <img src="assets/images/brands/7.png" alt="Brand Name">-->
+                                            <h4>GODREJ INTERIO</h4>
+                                        </a>
+                                    </div><!-- End .owl-carousel -->
+
+                                    <div class="mb-3 mb-lg-5"></div>
+
+                                 
+
+                                    <div class="mb-3"></div><!-- End .mb-6 -->
+
+                                    
+                                    <!-- End .container -->
+
+                                    
+
+                                    <div class="mb-5"></div><!-- End .mb-5 -->
+
+                                    
+
+                                    
+                                    
+                                    <div class="mb-6"></div><!-- End .mb-6 -->
+
+
+
+                                    <div class="container">
+                                        <div class="heading heading-center mb-3">
+                                            <h2 class="title">Top Selling Products</h2>
+
+                                            <ul class="nav nav-pills nav-border-anim justify-content-center"
+                                                role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="top-all-link" data-toggle="tab"
+                                                        href="#top-all-tab" role="tab" aria-controls="top-all-tab"
+                                                        aria-selected="true">All</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="top-fur-link" data-toggle="tab"
+                                                        href="#top-fur-tab" role="tab" aria-controls="top-fur-tab"
+                                                        aria-selected="false">Chairs</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="top-decor-link" data-toggle="tab"
+                                                        href="#top-table-tab" role="tab" aria-controls="top-decor-tab"
+                                                        aria-selected="false">Consoles</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="top-decor-link" data-toggle="tab"
+                                                        href="#top-sofa-tab" role="tab" aria-controls="top-decor-tab"
+                                                        aria-selected="false">Sofa</a>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane p-0 fade show active" id="top-all-tab" role="tabpanel"
+                                                aria-labelledby="top-all-link">
+                                                <div class="products">
+                                                    <div class="row justify-content-center">
+                                                        <% if( product.length>0){
+                                                            for( let i=1; i<=product.length; i++){%>
+                                                                <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                                                    <div class="product product-11 text-center">
+                                                                        <figure class="product-media">
+                                                                            <a
+                                                                                href="/productdetails?id=<%=product[i-1]._id%>">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image-hover">
+                                                                            </a>
+
+                                                                            <div class="product-action-vertical">
+                                                                                <button onclick="addToWishlist('<%=product[i-1]._id%>')" class="btn-product-icon btn-wishlist  border-0 btn-expandable"><span>add to wishlist</span></button>
+                                                                                        <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                            </div><!-- End .product-action-vertical -->
+                                                                        </figure><!-- End .product-media -->
+
+                                                                        <div class="product-body">
+                                                                            <div class="product-cat">
+                                                                                <a href="#">
+                                                                                    <%=product[i-1].brand%>
+                                                                                </a>
+                                                                            </div><!-- End .product-cat -->
+                                                                            <h3 class="product-title"><a
+                                                                                    href="product.html">
+                                                                                    <%=product[i-1].name%>
+                                                                                </a></h3><!-- End .product-title -->
+                                                                            <div class="product-price">
+                                                                                ₹<%=product[i-1].price%>
+
+                                                                            </div><!-- End .product-price -->
+                                                                        </div><!-- End .product-body -->
+                                                                        <div class="product-action">
+                                                                            <button onclick="addToCart('<%=product[i-1]._id%>')" class="btn-product btn-cart border-0" > <span>Add to cart</span></button>
+
+                                                                            <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                        </div><!-- End .product-action -->
+                                                                    </div><!-- End .product -->
+                                                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                                                                <%}}%>
+
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .products -->
+                                            </div><!-- .End .tab-pane -->
+                                            <div class="tab-pane p-0 fade" id="top-fur-tab" role="tabpanel"
+                                                aria-labelledby="top-fur-link">
+                                                <div class="products">
+                                                    <div class="row justify-content-center">
+                                                        <% if( product.length>0){
+                                                            for( let i=1; i<=product.length; i++){
+                                                        if( product[i-1].category=='Chairs'){%>
+
+                                                                <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                                                    <div class="product product-11 text-center">
+                                                                        <figure class="product-media">
+                                                                            <a
+                                                                                href="/productdetails?id=<%=product[i-1]._id%>">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image-hover">
+                                                                            </a>
+
+                                                                            <div class="product-action-vertical">
+                                                                                <button onclick="addToWishlist('<%=product[i-1]._id%>')" class="btn-product-icon btn-wishlist  border-0 btn-expandable"><span>add to wishlist</span></button>
+                
+                                                                                        <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                            </div><!-- End .product-action-vertical -->
+                                                                        </figure><!-- End .product-media -->
+
+                                                                        <div class="product-body">
+                                                                            <div class="product-cat">
+                                                                                <a href="#">
+                                                                                    <%=product[i-1].brand%>
+                                                                                </a>
+                                                                            </div><!-- End .product-cat -->
+                                                                            <h3 class="product-title"><a
+                                                                                    href="product.html">
+                                                                                    <%=product[i-1].name%>
+                                                                                </a></h3><!-- End .product-title -->
+                                                                            <div class="product-price">
+                                                                                ₹<%=product[i-1].price%>
+
+                                                                            </div><!-- End .product-price -->
+                                                                        </div><!-- End .product-body -->
+                                                                        <div class="product-action">
+                                                                            <button onclick="addToCart('<%=product[i-1]._id%>')" class="btn-product btn-cart border-0" > <span>Add to cart</span></button>
+
+                                                                            <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                        </div><!-- End .product-action -->
+                                                                    </div><!-- End .product -->
+                                                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                                                                <%}}}%>
+
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .products -->
+                                            </div><!-- .End .tab-pane -->
+                                            <div class="tab-pane p-0 fade" id="top-table-tab" role="tabpanel"
+                                                aria-labelledby="top-decor-link">
+                                                <div class="products">
+                                                    <div class="row justify-content-center">
+                                                        <% if( product.length>0){
+                                                            for( let i=1; i<=product.length; i++){
+                                                             if( product[i-1].category=='Consoles'){%>
+
+                                                                <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                                                    <div class="product product-11 text-center">
+                                                                        <figure class="product-media">
+                                                                            <a
+                                                                                href="/productdetails?id=<%=product[i-1]._id%>">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image-hover">
+                                                                            </a>
+
+                                                                            <div class="product-action-vertical">
+                                                                                <button onclick="addToWishlist('<%=product[i-1]._id%>')" class="btn-product-icon btn-wishlist  border-0 btn-expandable"><span>add to wishlist</span></button>
+                                                                                        <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                            </div><!-- End .product-action-vertical -->
+                                                                        </figure><!-- End .product-media -->
+
+                                                                        <div class="product-body">
+                                                                            <div class="product-cat">
+                                                                                <a href="#">
+                                                                                    <%=product[i-1].brand%>
+                                                                                </a>
+                                                                            </div><!-- End .product-cat -->
+                                                                            <h3 class="product-title"><a
+                                                                                    href="product.html">
+                                                                                    <%=product[i-1].name%>
+                                                                                </a></h3><!-- End .product-title -->
+                                                                            <div class="product-price">
+                                                                                ₹<%=product[i-1].price%>
+
+                                                                            </div><!-- End .product-price -->
+                                                                        </div><!-- End .product-body -->
+                                                                        <div class="product-action">
+                                                                            <button onclick="addToCart('<%=product[i-1]._id%>')" class="btn-product btn-cart border-0" > <span>Add to cart</span></button>
+                                                                            <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                        </div><!-- End .product-action -->
+                                                                    </div><!-- End .product -->
+                                                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                                                                <%}}}%>
+
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .products -->
+                                            </div>
+                                            <!-- .End .tab-pane -->
+                                            <div class="tab-pane p-0 fade" id="top-sofa-tab" role="tabpanel"
+                                                aria-labelledby="top-decor-link">
+                                                <div class="products">
+                                                    <div class="row justify-content-center">
+                                                        <% if( product.length>0){
+                                                            for( let i=1; i<=product.length; i++){
+                                                        if( product[i-1].category=='Sofa'){%>
+
+                                                                <div class="col-6 col-md-4 col-lg-3 col-xl-5col">
+                                                                    <div class="product product-11 text-center">
+                                                                        <figure class="product-media">
+                                                                            <a
+                                                                                href="/productdetails?id=<%=product[i-1]._id%>">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image">
+                                                                                <img src="/productImage/<%=product[i-1].image%>"
+                                                                                    alt="Product image"
+                                                                                    style="width: 400vw; height:30vh;"
+                                                                                    class="product-image-hover">
+                                                                            </a>
+
+                                                                            <div class="product-action-vertical">
+                                                                                <button onclick="addToWishlist('<%=product[i-1]._id%>')" class="btn-product-icon btn-wishlist  border-0 btn-expandable"><span>add to wishlist</span></button>
+                                                                                        <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                            </div><!-- End .product-action-vertical -->
+                                                                        </figure><!-- End .product-media -->
+
+                                                                        <div class="product-body">
+                                                                            <div class="product-cat">
+                                                                                <a href="#">
+                                                                                    <%=product[i-1].brand%>
+                                                                                </a>
+                                                                            </div><!-- End .product-cat -->
+                                                                            <h3 class="product-title"><a
+                                                                                    href="product.html">
+                                                                                    <%=product[i-1].name%>
+                                                                                </a></h3><!-- End .product-title -->
+                                                                            <div class="product-price">
+                                                                                ₹<%=product[i-1].price%>
+
+                                                                            </div><!-- End .product-price -->
+                                                                        </div><!-- End .product-body -->
+                                                                        <div class="product-action">
+                                                                            <button onclick="addToCart('<%=product[i-1]._id%>')" class="btn-product btn-cart border-0" > <span>Add to cart</span></button>
+                                                                            <input type="hidden" name="id"
+                                                                                value="<%= product[i-1]._id %>">
+                                                                        </div><!-- End .product-action -->
+                                                                    </div><!-- End .product -->
+                                                                </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                                                                <%}}}%>
+
+                                                    </div><!-- End .row -->
+                                                </div><!-- End .products -->
+                                            </div>
+                                           
+                                        </div><!-- End .tab-content -->
+                                    </div><!-- End .container -->
+
+
+
+
+
+                                    <div class="container">
+                                        <hr class="mt-1 mb-6">
+                                    </div><!-- End .container -->
+
+                                    
+                                    <!-- End .blog-posts -->
+                    </main><!-- End .main -->
+
+<%-include ('../partials/landingFooter.ejs') %>

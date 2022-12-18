@@ -1,0 +1,70 @@
+<% if(isLoggedin) { %>
+    <%- include ('../partials/userHeader.ejs',{ccount:ccount,wcount:wcount, category:category}) %>
+
+        <%}else { %>
+            <%- include ('../partials/landingHeader.ejs',{category:category}) %>
+                <%}%>
+
+
+<main class="main">
+    <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        <div class="container">
+            <h1 class="page-title">Your order has been successfully<span>Completed</span></h1>
+        </div><!-- End .container -->
+    </div><!-- End .page-header -->
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/viewcart">Cart</a></li>
+                <li class="breadcrumb-item"><a href="#">CheckOut</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Payment Success</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="page-content pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="about-text text-center mt-3">
+                        <h2 class="title text-center mb-2"> Thank You </h2><!-- End .title text-center mb-2 -->
+                        <img src="assets/images/about/about-2/signature.png" alt="signature" class="mx-auto mb-5">
+
+                        <!-- <img src="assets/images/about/about-2/img-1.jpg" alt="image" class="mx-auto mb-6"> -->
+                    </div><!-- End .about-text -->
+                </div><!-- End .col-lg-10 offset-1 -->
+            </div><!-- End .row -->
+           
+        </div><!-- End .container -->
+
+        <div class="mb-2"></div><!-- End .mb-2 -->
+
+        
+        
+        <div class="text-center mt-3">
+            <a href="/shop" class="btn btn-sm btn-minwidth-lg btn-outline-primary-2">
+                <span>Continue Shopping</span>
+                <i class="icon-long-arrow-right"></i>
+            </a>
+            <a href="/" class="btn btn-sm btn-minwidth-lg btn-outline-primary-2">
+                <span>Return to Homepage</span>
+                <i class="icon-long-arrow-right"></i>
+            </a>
+        </div><!-- End .text-center -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="brands-text text-center mx-auto mb-6">
+                        <h2 class="title">The world's premium design brands in one destination.</h2><!-- End .title -->
+                        <!-- <p>Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nis</p> -->
+                    </div><!-- End .brands-text -->
+                   
+                </div><!-- End .col-lg-10 offset-lg-1 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+</main><!-- End .main -->
+
+<%-include ('../partials/landingFooter.ejs') %>

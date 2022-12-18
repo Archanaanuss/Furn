@@ -1,0 +1,92 @@
+<%- include ('../partials/adminHeader.ejs') %>
+
+
+    <!-- Recent Sales Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-secondary text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <form class="d-none d-md-flex ms-4">
+                    <input class="form-control bg-dark border-0" type="search" name="search" placeholder="Search">
+                    <input type="submit" value="search">
+                </form>
+                <a href="">Show All</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+
+                            <th scope="col">Product name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if( product.length> 0){ %>
+                            <% for(let i=1;i <=product.length; i++){ %>
+                                <tr  class="text-dark">
+                                    <td>
+                                        <%= product[i-1].name %>
+                                    </td>
+                                    <td>
+                                        ₹<%= product[i-1].price %>
+                                    </td>
+                                    <td>
+                                        <%= product[i-1].brand %>
+                                    </td>
+                                    <td>
+                                        <%= product[i-1].category %>
+                                    </td>
+                                    <td>
+                                        <%= product[i-1].stock %>
+                                    </td>
+                                    <td>
+                                        <%= product[i-1].rating %>
+                                    </td>
+                                    <td><img src="/productImage/<%=product[i-1].image%> " width="150vw" height="150vh"
+                                            alt="=furniture"></td>
+
+                                    <td>
+                                        <a class="btn btn-sm btn-info"
+                                            href="/admin/editproduct?id=<%= product[i-1]._id %>">
+                                            Edit
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <a class="btn btn-sm btn-primary"
+                                            href="/admin/deleteproduct?id=<%= product[i-1]._id %>">
+                                            Delete
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <%if(product[i-1].isDelete==0){%>
+                                            <a class="btn btn-sm btn-warning"
+                                            href="/admin/backtosoftdelete?id=<%= product[i-1]._id %>">
+                                            Deleted
+                                        </a>
+                                            <%}else{%>
+                                                <a class="btn btn-sm btn-danger"
+                                                    href="/admin/softdeleteproduct?id=<%= product[i-1]._id %>">
+                                                   soft Delete
+                                                </a>
+                                       <% }%>
+                                    </td>
+                                </tr>
+                                <% } } else{ %>
+                                    <tr>
+                                        <td colspan="5">Product Not Found</td>
+                                    </tr>
+                                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Sales End -->

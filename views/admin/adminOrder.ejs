@@ -1,0 +1,217 @@
+<%-include('../partials/adminHeader.ejs') %>
+
+
+    <div class="container-fluid">
+
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <a href="" class="">
+                        <h3 class="text-primary">
+                            Order Management
+                        </h3>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-4 col-xl-4">
+                    <a href="/admin/adminOrder?id=ALL" class="btn btn-primary col-12 col-md-4 col-xl-4" >
+                        <span class="d-none d-lg-inline-flex">All Orders</span>
+                    </a>
+                   
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-xl-4">
+                <a href="/admin/adminOrder?id=CONFIRMED" class="btn btn-primary col-12  col-md-4 col-xl-4" >
+                    <span class="d-none d-lg-inline-flex">Comfirmed Orders</span>
+                </a>
+            </div>
+           <div class="col-12 col-sm-12 col-md-4 col-xl-4">
+                <a href="/admin/adminOrder?id=DELIVERED" class="btn btn-primary col-12  col-md-4 col-xl-4" >
+                    <span class="d-none d-lg-inline-flex">Delivered Orders</span>
+                </a>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row h-100 align-items-center justify-content-center">
+                    <% if(id=='CONFIRMED' ){ %>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <table id="pdfTable" class="table text-responsive align-middle table-striped table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">SI NO</th>
+                                        <th scope="col">Order Id</th>
+                                        <th scope="col">User Id</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Mode</th>
+                                        <th scope="col">Total Price</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if( order.length> 0){ %>
+                                        <% for(let i=1;i <=order.length; i++){ %>
+                                            <% if(order[i-1].status =="Comfirmed"){ %>
+                                            <tr>
+                                                <th scope="row">
+                                                    <%= i %>
+                                                </th>
+                                                <td>
+                                                    <%= order[i-1]._id %>
+                                                </td>
+                                                <td>
+                                                    <%= order[i-1].userId %>
+                                                </td>
+                                                <td>
+                                                    <%= order[i-1].createdAt %>
+                                                </td>
+                                                <td>
+                                                    <%= order[i-1].payment %>
+                                                </td>
+                                                <td>
+                                                    <%= order[i-1].products.totalPrice %>
+                                                </td>
+                                                <td class="text-success">
+                                                    <%= order[i-1].status %>
+                                                </td>
+                                                <td>
+                                                    <a href="/admin/admin-cancel-order?id=<%= order[i-1]._id %>"
+                                                        class="btn btn-outline-danger mb-1">Cancel Order</a>
+                                                    <a href="/admin/admin-delivered-order?id=<%= order[i-1]._id %>"
+                                                        class="btn btn-outline-primary ">Deliver Order</a>
+                                                </td>
+                                            </tr>
+                                            <% }}}else{ %>
+                                                <tr>
+                                                    <td colspan="5">Orders Not Found</td>
+                                                </tr>
+                                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <% }else if(id=='DELIVERED' ){ %>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="bg-light rounded h-100 p-4">
+                                <table id="pdfTable" class="table text-responsive align-middle table-striped table-hover mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">SI NO</th>
+                                            <th scope="col">Order Id</th>
+                                            <th scope="col">User Id</th>
+                                            <th scope="col">Time</th>
+                                            <th scope="col">Mode</th>
+                                            <th scope="col">Total Price</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if( order.length> 0){ %>
+                                            <% for(let i=1;i <=order.length; i++){ %>
+                                                <% if(order[i-1].status =="Delivered"){ %>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%= i %>
+                                                    </th>
+                                                    <td>
+                                                        <%= order[i-1]._id %>
+                                                    </td>
+                                                    <td>
+                                                        <%= order[i-1].userId %>
+                                                    </td>
+                                                    <td>
+                                                        <%= order[i-1].createdAt %>
+                                                    </td>
+                                                    <td>
+                                                        <%= order[i-1].payment %>
+                                                    </td>
+                                                    <td>
+                                                        <%= order[i-1].products.totalPrice %>
+                                                    </td>
+                                                    <td class="text-success">
+                                                        <%= order[i-1].status %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/admin/admin-cancel-order?id=<%= order[i-1]._id %>"
+                                                            class="btn btn-outline-danger mb-1">Cancel Order</a>
+                                                    </td>
+                                                </tr>
+                                                <% }}}else{ %>
+                                                    <tr>
+                                                        <td colspan="5">Orders Not Found</td>
+                                                    </tr>
+                                                    <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+    
+                        <% }else{ %>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="bg-light rounded h-100 p-4">
+                                    <table id="pdfTable"class="table text-responsive align-middle table-striped table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">SI NO</th>
+                                                <th scope="col">Order Id</th>
+                                                <th scope="col">User Id</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Mode</th>
+                                                <th scope="col">Total Price</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if( order.length> 0){ %>
+                                                <% for(let i=1;i <=order.length; i++){ %>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%= i %>
+                                                        </th>
+                                                        <td>
+                                                            <%= order[i-1]._id %>
+                                                        </td>
+                                                        <td>
+                                                            <%= order[i-1].userId %>
+                                                        </td>
+                                                        <td>
+                                                            <%= order[i-1].createdAt %>
+                                                        </td>
+                                                        <td>
+                                                            <%= order[i-1].payment %>
+                                                        </td>
+                                                        <td>
+                                                            <%= order[i-1].products.totalPrice %>
+                                                        </td>
+                                                        <td>
+                                                            <%= order[i-1].status %>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/admin-cancel-order?id=<%= order[i-1]._id %>"
+                                                                class="btn btn-outline-danger mb-1">Cancel Order</a>
+                                                            <a href="/admin/admin-confirm-order?id=<%= order[i-1]._id %>"
+                                                                class="btn btn-outline-success ">Comfirm Order</a>
+                                                        </td>
+                                                    </tr>
+                                                    <% }}else{ %>
+                                                        <tr>
+                                                            <td colspan="5">Orders Not Found</td>
+                                                        </tr>
+                                                        <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <% } %>
+        
+
+                </div>
+
+            </div>
+        </div>
+    </div>

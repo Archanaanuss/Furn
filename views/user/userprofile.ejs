@@ -1,0 +1,270 @@
+<% if(isLoggedin) { %>
+    <%- include ('../partials/userHeader.ejs',{ccount:ccount,wcount:wcount,category:category}) %>
+
+        <%}else { %>
+            <%- include ('../partials/landingHeader.ejs',{category:category}) %>
+                <%}%>
+
+
+
+    <main class="main">
+        <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+            <div class="container">
+                <h1 class="page-title">My Account<span>Shop</span></h1>
+            </div><!-- End .container -->
+        </div><!-- End .page-header -->
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="#">Shop</a></li> -->
+                    <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container">
+                    <div class="row">
+                        <aside class="col-md-4 col-lg-3">
+                            <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="tab-dashboard-link" data-toggle="tab"
+                                        href="#tab-dashboard" role="tab" aria-controls="tab-dashboard"
+                                        aria-selected="true">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders"
+                                        role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads"
+                                        role="tab" aria-controls="tab-downloads" aria-selected="false">Downloads</a>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address"
+                                        role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account"
+                                        role="tab" aria-controls="tab-account" aria-selected="false">Account
+                                        Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">Sign Out</a>
+                                </li>
+                            </ul>
+                        </aside><!-- End .col-lg-3 -->
+
+                        <div class="col-md-8 col-lg-9">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="tab-dashboard" role="tabpanel"
+                                    aria-labelledby="tab-dashboard-link">
+                                    <p>Hello <span class="font-weight-normal text-dark">
+                                            <%= user.name%> <%=user.lname%>
+                                        </span> (not <span class="font-weight-normal text-dark">User</span>? <a
+                                            href="#">Log
+                                            out</a>)
+                                        <br>
+                                        From your account dashboard you can view your <a href="#tab-orders"
+                                            class="tab-trigger-link link-underline">recent orders</a>, manage your
+                                        <a href="#tab-address" class="tab-trigger-link">shipping and billing
+                                            addresses</a>, and <a href="#tab-account" class="tab-trigger-link">edit
+                                            your password and account details</a>.
+                                    </p>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-orders" role="tabpanel"
+                                    aria-labelledby="tab-orders-link">
+                                    <%if(userOrders){%>
+										<div role="tabpanel" class="tab-pane" id="tabs-1-2">
+											<div class="nk-gap"></div>
+											
+											<section class="container">
+											  <table class="table text-success">
+												  <thead>
+													<tr>
+													  <th scope="col">OrderId</th>
+													  <th scope="col">Time</th>
+													  <th scope="col">Payment</th>
+													  <th scope="col">Status</th>
+													  <th scope="col">Actions</th>
+				  
+													</tr>
+												  </thead>
+												  <% for(let key of userOrders){ %>
+												  <tbody>
+													<tr>
+													  <td><%= key._id %></td>
+													  <td><%= key.createdAt %></td>
+													  <td><%= key.payment %></td>
+													  <td><%= key.status %></td>
+													  <td><a href="/cancel-order?id=<%= key._id %>" class="btn btn-outline-primary-2">Cancel Order</a></td>
+													  <td><a href="/view-order?id=<%= key._id %>" class="btn btn-primary ms-2 ">View Details</a></td>
+													</tr>
+												  </tbody>
+												  <% } %>
+												</table>
+										  </section>
+				  
+				  
+											<div class="nk-gap"></div>
+										</div>
+										<%}else{%>
+
+								    	<p>No order has been made yet.</p>
+								    	<a href="/shop" class="btn btn-outline-primary-2"><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
+										<%}%>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-downloads" role="tabpanel" aria-labelledby="tab-downloads-link">
+                                    <form action="/add-address" method="post" >
+                                        <div class="row">
+                                            <div class="col-lg-9">
+                                                <h2 class="checkout-title">New Address</h2><!-- End .checkout-title -->
+                                                    
+                                                
+                                                    <label>Name *</label>
+                                                     <input type="text" class="form-control" name="firstname" required>
+                                                        
+                                                     <label>Last Name *</label>
+                                                     <input type="text" class="form-control" name="lastname" required>
+
+                                                    <label>Country *</label>
+                                                    <input type="text" class="form-control" name="country" required>
+                    
+                                                    <label>Street address *</label>
+                                                    <input type="text" class="form-control" placeholder="House number and Street name" name="streetAddress" required>
+                                                    <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..." name="streetAddress2" required>
+                    
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label>Town / City *</label>
+                                                            <input type="text" class="form-control" name="city" required>
+                                                        </div><!-- End .col-sm-6 -->
+                    
+                                                        <div class="col-sm-6">
+                                                            <label>State / County *</label>
+                                                            <input type="text" class="form-control" name="state" required>
+                                                        </div><!-- End .col-sm-6 -->
+                                                    </div><!-- End .row -->
+                    
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <label>Postcode / ZIP *</label>
+                                                            <input type="text" class="form-control" name="pin" required>
+                                                        </div><!-- End .col-sm-6 -->
+                    
+                                                        <div class="col-sm-6">
+                                                            <label>Phone *</label>
+                                                            <input type="tel" class="form-control" name="mobileno" required>
+                                                        </div><!-- End .col-sm-6 -->
+                                                    </div><!-- End .row -->
+                    
+                                                    <label>Email address *</label>
+                                                    <input type="email" class="form-control" name="email" required>
+                    
+                                                
+                                                    <button type="submit" class="btn btn-outline-primary-2">
+                                                        <span>Update</span>
+                                                        <i class="icon-long-arrow-right"></i>
+                                                    </button>
+                                                        <a href="/dashboard" class="btn btn-outline-primary-2"><span>GO BACK</span><i class="icon-long-arrow-right"></i></a>
+                                            </div><!-- End .col-lg-9 -->
+                                        </div><!-- End .row -->
+                                    </form>
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+                                    <!-- <a href="#" class=""> Add Address <i class="icon-edit"></i></a> -->
+                                    <div>
+                                        <a class="nav-link btn  btn-outline-primary-2" id="tab-downloads-link" data-toggle="tab" href="#tab-downloads" role="tab" aria-controls="tab-downloads" aria-selected="false">Add Address<i class="icon-edit"></i></a>
+
+                                    </div>
+                                    <p>The following addresses will be used on the checkout page by default.</p>
+
+                                    <div class="row">
+                                        <%if(userAddress.length>0){
+                                            for(let key of userAddress){%>
+                                        <div class="col-lg-6">
+                                            <div class="card card-dashboard">
+
+                                                <div class="card-body">
+                                                    <h3 class="card-title">Billing Address</h3><!-- End .card-title -->
+
+                                                    <p><%= key.firstname %> <%=key.lastname%><br>
+                                                        <%= key.address %> , <%= key.address2 %><br>
+                                                        <%= key.city %> , <%= key.state %><br>
+                                                        <%= key.country %><br>
+                                                        <%= key.pin %><br>
+                                                        <%= key.mobileno %><br>
+                                                        <%= key.email %><br>
+                                                    <!-- <a href="#">Edit <i class="icon-edit"></i></a> -->
+                                                    <a href="/deleteaddress?id=<%= key._id %>"><i class="icon-close"></i> delete</a>
+                                                </p>
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .card-dashboard -->
+                                        </div><!-- End .col-lg-6 -->
+                                        <%}}else{%>
+
+                                        <div class="col-lg-6">
+                                            <div class="card card-dashboard">
+                                                <div class="card-body">
+                                                    <h3 class="card-title">Shipping Address</h3>
+
+                                                    <p>You have not set up this type of address yet.<br>
+                                                    <a href="#">Edit <i class="icon-edit"></i></a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                    </div><!-- End .row -->
+                                </div><!-- .End .tab-pane -->
+
+                                <div class="tab-pane fade" id="tab-account" role="tabpanel"
+                                    aria-labelledby="tab-account-link">
+                                    <form action="/edit-user" method="post">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>First Name *</label>
+                                                <input type="text" class="form-control" name="name" value="<%=user.name%>">
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Last Name </label>
+                                                <input type="text" class="form-control" name="lname" value="<%=user.lname%>" >
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <label>User name or Email Id *</label>
+                                        <input type="email" class="form-control" name="username" value="<%=user.username%>">
+                                        <small class="form-text">This will be how your name will be displayed in the account section and in reviews</small>
+
+                                        <label>Mobile Number *</label>
+                                        <input type="text" class="form-control" name="mobile" value="<%=user.mobile%>">
+
+                                        <!-- <label>Current password (leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control">
+
+                                        <label>New password (leave blank to leave unchanged)</label>
+                                        <input type="password" class="form-control">
+
+                                        <label>Confirm new password</label>
+                                        <input type="password" class="form-control mb-2"> -->
+
+                                        <button type="submit" class="btn btn-outline-primary-2">
+                                            <span>SAVE CHANGES</span>
+                                            <i class="icon-long-arrow-right"></i>
+                                        </button>
+                                    </form>
+                                </div><!-- .End .tab-pane -->
+                            </div>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    <%-include ('../partials/landingFooter.ejs') %>                                                                             
