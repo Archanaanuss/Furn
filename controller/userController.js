@@ -10,7 +10,6 @@ const Category = require('../models/categoryModel');
 const { ObjectId } = require('mongodb');
 
 let isLoggedin;
-isLoggedin = false;
 let session;
 let newOtp;
 let newUser;
@@ -142,7 +141,7 @@ const userRegister = async (req, res) => {
           newUser = userData._id;
           const otp = sendMessage(userData.mobile);
           newOtp = otp;
-          res.render('user/otp', { isLoggedin, category: cat });
+          res.render('user/otp', {category: cat });
         } else {
           res.render('user/userRegister', {
             message: 'Your registration was a failure',
@@ -152,20 +151,17 @@ const userRegister = async (req, res) => {
       } else if (alreadyExistingusername) {
         res.render('user/userRegister', {
           message: 'Username Already Exist',
-          isLoggedin,
           category: cat,
         });
       } else {
         res.render('user/userRegister', {
           message: 'Mobile Number Already Exist',
-          isLoggedin,
           category: cat,
         });
       }
     } else {
       res.render('user/userRegister', {
         message: 'Password mismatch',
-        isLoggedin,
         category: cat,
       });
     }
@@ -250,7 +246,7 @@ const userProfile = async (req, res) => {
 
       res.render('user/userprofile', {
         user: userData,
-        isLoggedin,
+        isLoggedin:true,
         userOrders: orderData,
         userAddress: addressData,
         ccount: userData.cart.totalqty,
@@ -330,7 +326,7 @@ const productDetails = async (req, res) => {
       const count = await User.findOne({ _id: session.userId });
 
       res.render('user/productDetails', {
-        isLoggedin,
+        isLoggedin:true,
         details: productData,
         ccount: count.cart.totalqty,
         wcount: count.wishlist.totalqty,
@@ -340,7 +336,7 @@ const productDetails = async (req, res) => {
       res.render('user/productDetails', {
         details: productData,
         category: cat,
-        isLoggedin,
+        isLoggedin:false,
         
       });
     }
@@ -387,7 +383,7 @@ const shopView = async (req, res) => {
     if (session.userId) {
       const count = await User.findOne({ _id: session.userId });
       res.render('user/shopView', {
-        isLoggedin,
+        isLoggedin:true,
         product: productData,
         ccount: count.cart.totalqty,
         wcount: count.wishlist.totalqty,
@@ -399,7 +395,7 @@ const shopView = async (req, res) => {
       });
     } else {
       res.render('user/shopView', {
-        isLoggedin,
+        isLoggedin:false,
         product: productData,
         category:category,
         totalPages: Math.ceil(countpage / limit),
@@ -455,7 +451,7 @@ const shopCategory = async (req, res) => {
     if (session.userId) {
       const count = await User.findOne({ _id: session.userId });
       res.render('user/shopView', {
-        isLoggedin,
+        isLoggedin:true,
         ccount: count.cart.totalqty,
         wcount: count.wishlist.totalqty,
         product: productData,
@@ -467,7 +463,7 @@ const shopCategory = async (req, res) => {
       });
     } else {
       res.render('user/shopView', {
-        isLoggedin,
+        isLoggedin:false,
         product: productData,
         category:category,
         totalPages: Math.ceil(countpage / limit),
@@ -496,7 +492,7 @@ const viewCart = async (req, res) => {
       }
       if (userData.cart.item.length === 0) {
         res.render('user/viewCart', {
-          isLoggedin,
+          isLoggedin:true,
           category: cat,
           ccount: userData.cart.totalqty,
           wcount: userData.wishlist.totalqty,
@@ -508,7 +504,7 @@ const viewCart = async (req, res) => {
         });
       } else {
         res.render('user/viewCart', {
-          isLoggedin,
+          isLoggedin:true,
           ccount: userData.cart.totalqty,
           wcount: userData.wishlist.totalqty,
           category: cat,
@@ -521,7 +517,7 @@ const viewCart = async (req, res) => {
       }
     } else {
       res.render('user/viewCart', {
-        isLoggedin,
+        isLoggedin:false,
         category: cat,
         id: session.userId,
         offer: session.offer,
@@ -567,7 +563,7 @@ const WishlistView = async (req, res) => {
       const completeUser = await userData.populate('wishlist.item.productId');
       if (userData.wishlist.item.length === 0) {
         res.render('user/wishList', {
-          isLoggedin,
+          isLoggedin: true,
           category: cat,
           ccount: userData.cart.totalqty,
           wcount: userData.wishlist.totalqty,
@@ -577,7 +573,7 @@ const WishlistView = async (req, res) => {
         });
       } else {
         res.render('user/wishList', {
-          isLoggedin,
+          isLoggedin:true,
           category: cat,
           ccount: userData.cart.totalqty,
           wcount: userData.wishlist.totalqty,
@@ -588,7 +584,7 @@ const WishlistView = async (req, res) => {
       }
     } else {
       res.render('user/wishList', {
-        isLoggedin,
+        isLoggedin:false,
         id: session.userId,
         category: cat,
       });
@@ -699,7 +695,7 @@ const checkOut = async (req, res) => {
         session.couponTotal=userData.cart.totalPrice;
       }
       res.render('user/checkOut', {
-        isLoggedin,
+        isLoggedin:true,
         ccount: userData.cart.totalqty,
         wcount: userData.wishlist.totalqty,
         category: cat,
@@ -776,7 +772,7 @@ const storeOrder = async (req, res) => {
             ccount: userData.cart.totalqty,
             wcount: userData.wishlist.totalqty,
             category: cat,
-            isLoggedin,
+            isLoggedin:true,
           });
         } else {
           res.redirect('/');
@@ -831,7 +827,7 @@ const paymentSuccess = async (req, res) => {
       res.render('user/orderSuccess', {
         ccount: userData.cart.totalqty,
         wcount: userData.wishlist.totalqty,
-        isLoggedin,
+        isLoggedin:true,
         category: cat,
       });
     }
